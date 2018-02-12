@@ -1,0 +1,21 @@
+{
+    "extends": "airbnb",
+    "plugins": ["jest"],
+    "env": {
+        "jest/globals": true,
+        "browser": true,
+        "node": true
+    },
+    "rules": {
+        "no-unused-vars": ["error", {"argsIgnorePattern":"next"}],
+        "react/prop-types": [0],
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true}],
+
+        "prefer-destructuring": ["error", {"array": true, "object": false}, {"enforceForRenamedProperties": false}],
+        "jsx-a11y/anchor-is-valid": [ "error", {
+            "components": [ "Link" ],
+            "specialLink": [ "hrefLeft", "hrefRight", "to"],
+            "aspects": [ "noHref", "invalidHref", "preferButton" ]
+          }]
+    }
+}
