@@ -1,3 +1,4 @@
+require('babel-register');
 const express = require('express');
 const path = require('path');
 // const favicon = require('serve-favicon');
@@ -8,12 +9,12 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const expressSession = require('express-session')({
-  secret: 'This boilerplate is Awesome!',
+  secret: 'ScrumItUp is Awesome!',
   resave: false,
   saveUninitialized: false,
 });
 const webpack = require('webpack');
-const webpackConfig = require('./webpack.config');
+const webpackConfig = require('./webpack.config.babel');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
@@ -23,11 +24,12 @@ const User = require('./models/user');
 const index = require('./routes/index');
 const api = require('./routes/api');
 const users = require('./routes/api/users');
+const auth = require('./routes/api/auth');
 
 const app = express();
 
 // Connect mongo db
-mongoose.connect('mongodb://localhost/'); // add your mongo server!
+mongoose.connect('mongodb://localhost/scrumitup');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -45,21 +47,24 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Webpack server
-const webpackCompiler = webpack(webpackConfig);
-app.use(webpackDevMiddleware(webpackCompiler, {
-  publicPath: webpackConfig.output.publicPath,
-  stats: {
-    colors: true,
-    chunks: true,
-    'errors-only': true,
-  },
-}));
-app.use(webpackHotMiddleware(webpackCompiler, {
-  log: console.log,
-}));
+if (process.env.NODE_ENV !== 'production') {
+  const webpackCompiler = webpack(webpackConfig);
+  app.use(webpackDevMiddleware(webpackCompiler, {
+    publicPath: webpackConfig.output.publicPath,
+    stats: {
+      colors: true,
+      chunks: true,
+      'errors-only': true,
+    },
+  }));
+  app.use(webpackHotMiddleware(webpackCompiler, {
+    log: console.log,
+  }));
+}
 
 app.use('/api', api);
 app.use('/api/users', users);
+app.use('/api/auth', auth);
 app.use('/*', index);
 
 // Configure passport(Google)

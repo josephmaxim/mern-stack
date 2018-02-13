@@ -4,24 +4,27 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "start-w": "webpack-dev-server",
+    "start-prod": "NODE_ENV=production node ./bin/www",
     "test": "jest",
     "lint": "eslint .",
-    "build-dev": "webpack --config webpack.config.js --progress --profile --colors"
+    "build-prod": "NODE_ENV=production webpack -p --config webpack.config.babel.js"
   },
   "dependencies": {
     "babel": "^6.23.0",
     "babel-core": "^6.26.0",
     "babel-jest": "^22.2.2",
     "babel-loader": "^7.1.2",
-    "babel-preset-es2017": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
+    "css-loader": "^0.28.9",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.15.5",
     "express-session": "^1.15.6",
+    "extract-text-webpack-plugin": "^3.0.2",
     "global": "^4.3.2",
     "loader": "^2.1.1",
     "mongoose": "^5.0.4",
@@ -36,9 +39,11 @@
     "react-router-dom": "^4.2.2",
     "sass-loader": "^6.0.6",
     "serve-favicon": "~2.4.5",
+    "style-loader": "^0.20.1",
     "webpack": "^3.11.0",
     "webpack-dev-middleware": "^2.0.5",
-    "webpack-hot-middleware": "^2.21.0"
+    "webpack-hot-middleware": "^2.21.0",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "eslint": "^4.17.0",
@@ -49,7 +54,6 @@
     "eslint-plugin-react": "^7.6.1",
     "jest": "^22.2.2",
     "react-hot-loader": "^4.0.0-beta.22",
-    "supertest": "^3.0.0",
-    "webpack-dev-server": "^2.11.1"
+    "supertest": "^3.0.0"
   }
 }

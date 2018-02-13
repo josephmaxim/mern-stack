@@ -1,13 +1,14 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+import './css/style.scss';
 
 import Template from './components/Template';
 
 const renderApp = (Component) => {
   render(
     <AppContainer>
-      <Component title="mern-stack!" />
+      <Component title="MERN Stack" />
     </AppContainer>,
     document.querySelector('#react-app'),
   );
