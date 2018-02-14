@@ -2,9 +2,9 @@ const express = require('express');
 
 const router = express.Router();
 
-/* GET home page. */
+/* Serve React on root path "/" */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'SrcrumItUp' });
+  res.render('index', { title: 'MERN-stack' });
 });
 
 module.exports = router;

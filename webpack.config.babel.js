@@ -23,6 +23,7 @@ const jsOutputLocation = process.env.NODE_ENV === 'production' ? jsProdOutput : 
 module.exports = {
   context: resolve(__dirname, 'src'),
   entry: [
+    'babel-polyfill',
     './index.jsx',
   ],
   output: jsOutputLocation,

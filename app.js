@@ -1,4 +1,3 @@
-require('babel-register');
 const express = require('express');
 const path = require('path');
 // const favicon = require('serve-favicon');
@@ -22,14 +21,11 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const User = require('./models/user');
 
 const index = require('./routes/index');
-const api = require('./routes/api');
-const users = require('./routes/api/users');
-const auth = require('./routes/api/auth');
 
 const app = express();
 
 // Connect mongo db
-mongoose.connect('mongodb://localhost/scrumitup');
+mongoose.connect('mongodb://localhost/');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -62,9 +58,6 @@ if (process.env.NODE_ENV !== 'production') {
   }));
 }
 
-app.use('/api', api);
-app.use('/api/users', users);
-app.use('/api/auth', auth);
 app.use('/*', index);
 
 // Configure passport(Google)

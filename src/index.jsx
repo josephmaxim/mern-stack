@@ -3,21 +3,21 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import './css/style.scss';
 
-import Template from './components/Template';
+import App from './App';
 
 const renderApp = (Component) => {
   render(
     <AppContainer>
-      <Component title="MERN Stack" />
+      <Component />
     </AppContainer>,
     document.querySelector('#react-app'),
   );
 };
 
-renderApp(Template);
+renderApp(App);
 
 if (module && module.hot) {
-  module.hot.accept('./components/Template', () => {
-    renderApp(Template);
+  module.hot.accept('./App', () => {
+    renderApp(App);
   });
 }
