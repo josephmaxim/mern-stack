@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import HomePageContainer from './containers/HomePageContainer';
 
-export default function Template() {
+export default function App() {
   return (
     <Router>
       <div>
