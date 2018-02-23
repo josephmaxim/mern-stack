@@ -4,11 +4,12 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const compression = require('compression');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const expressSession = require('express-session')({
-  secret: 'ScrumItUp is Awesome!',
+  secret: 'Mern stack is Awesome!',
   resave: false,
   saveUninitialized: false,
 });
@@ -36,6 +37,7 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(compression());
 app.use(cookieParser());
 app.use(expressSession);
 app.use(passport.initialize());
