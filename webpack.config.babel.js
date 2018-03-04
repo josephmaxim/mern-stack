@@ -46,7 +46,7 @@ module.exports = {
         }),
       },
       {
-        test: /\.sass?$/,
+        test: /\.scss?$/,
         use: ExtractTextPlugin.extract({
           use: [
             {
@@ -59,12 +59,28 @@ module.exports = {
           fallback: 'style-loader',
         }),
       },
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          'file-loader?name=[hash].[ext]&outputPath=public/img/&publicPath=img/',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true,
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new ExtractTextPlugin(cssOutputLocation),
+    new ExtractTextPlugin({
+      filename: cssOutputLocation,
+      allChunks: true,
+      disable: process.env.NODE_ENV !== 'production',
+    }),
   ],
 };
 
