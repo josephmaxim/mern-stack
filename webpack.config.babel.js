@@ -42,7 +42,7 @@ module.exports = {
         test: /\.css?$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: 'css-loader',
+          use: 'style-loader!css-loader!resolve-url-loader',
         }),
       },
       {
@@ -53,6 +53,9 @@ module.exports = {
               loader: 'css-loader',
             },
             {
+              loader: 'resolve-url-loader',
+            },
+            {
               loader: 'sass-loader',
             },
           ],
@@ -60,9 +63,9 @@ module.exports = {
         }),
       },
       {
-        test: /\.(gif|png|jpe?g|svg)$/i,
+        test: /\.(gif|png|jpg|svg)$/i,
         use: [
-          'file-loader?name=[hash].[ext]&outputPath=public/img/&publicPath=img/',
+          'file-loader?name=[hash].[ext]&outputPath=public/img/&publicPath=/img/',
           {
             loader: 'image-webpack-loader',
             options: {
